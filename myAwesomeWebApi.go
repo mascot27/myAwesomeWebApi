@@ -13,22 +13,12 @@ import (
 
 	"log"
 
-	abc "github.com/google/uuid"
 )
 
 func main() {
 	addressHttps := ":8443"
 	certFileHttps := "server.crt"
 	keyFileHttps := "server.key"
-
-	/*
-		Uuid to string tests
-	*/
-
-	fmt.Println("uuid")
-	fmt.Println(abc.NewRandom())
-	u1, _ := abc.NewRandom()
-	fmt.Println("u1:", u1.String())
 
 	fmt.Println("api accessible by: " + addressHttps)
 

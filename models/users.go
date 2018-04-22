@@ -15,6 +15,11 @@ func (tPassword) MarshalJSON() ([]byte, error) {
 	return []byte(`""`), nil
 }
 
+/**
+Mock data:
+TODO: implement db
+TODO: hash passwords
+ */
 var Users = []User{
 	User{
 		Name:     "user1",
@@ -50,6 +55,3 @@ func HashPassword(plaintext string) tPassword {
 	//TODO: implement me
 	return tPassword(plaintext)
 }
-
-// TODO: database integration
-// TODO: encrypt password

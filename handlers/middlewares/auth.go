@@ -25,10 +25,8 @@ func AuthMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		name := claims.(jwt.MapClaims)["name"].(string)
 		role := claims.(jwt.MapClaims)["role"].(string)
 
-		r.Header.Set("name", name)
 		r.Header.Set("role", role)
 
 		next.ServeHTTP(w, r)

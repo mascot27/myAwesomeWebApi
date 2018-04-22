@@ -26,7 +26,9 @@ func Authenticate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if models.IsValidCredentials(name, password) {
+	_, err := models.IsValidCredentials(name, password)
+
+	if err == nil {
 		token, err := middleware.GetToken(name)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
