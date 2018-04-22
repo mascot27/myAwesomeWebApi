@@ -3,7 +3,7 @@ package middlewares
 import (
 	jwt "github.com/dgrijalva/jwt-go"
 	googleUuid "github.com/google/uuid"
-	"myAwesomeWebApi/config"
+	"github.com/mascot27/myAwesomeWebApi/configmyAwesomeWebApi/config"
 	"myAwesomeWebApi/models"
 	"time"
 )

@@ -2,8 +2,8 @@ package endpoints
 
 import (
 	"encoding/json"
-	middleware "myAwesomeWebApi/handlers/middlewares"
-	"myAwesomeWebApi/models"
+	middleware "github.com/mascot27/myAwesomeWebApi/handlers/middlewares"
+	"github.com/mascot27/myAwesomeWebApi/models"
 	"net/http"
 )
 

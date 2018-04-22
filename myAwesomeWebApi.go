@@ -7,9 +7,9 @@ import (
 	ghandler "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 
-	"myAwesomeWebApi/handlers"
-	"myAwesomeWebApi/handlers/endpoints"
-	"myAwesomeWebApi/models"
+	"github.com/mascot27/myAwesomeWebApi/handlers"
+	"github.com/mascot27/myAwesomeWebApi/handlers/endpoints"
+	"github.com/mascot27/myAwesomeWebApi/models"
 
 	"log"
 
