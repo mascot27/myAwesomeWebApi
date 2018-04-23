@@ -6,13 +6,11 @@ import (
 
 	ghandler "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
-
 	"github.com/mascot27/myAwesomeWebApi/handlers"
 	"github.com/mascot27/myAwesomeWebApi/handlers/endpoints"
 	"github.com/mascot27/myAwesomeWebApi/models"
 
 	"log"
-
 )
 
 func main() {
@@ -26,28 +24,25 @@ func main() {
 	originsOk := ghandler.AllowedOrigins([]string{"*"})
 	methodsOk := ghandler.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "OPTIONS"})
 
+	// base server
 	var router = mux.NewRouter().StrictSlash(true)
 
+	// auth server
+	var routerAuthServer = router.PathPrefix("/auth").Subrouter()
+	routerAuthServer.HandleFunc("/get-token", authServerGetToken).Methods("POST")
+	routerAuthServer.HandleFunc("/refresh-token", authServerRefreshToken).Methods("POST")
+
+
+	// ROUTES - /api
 	var routerApi = router.PathPrefix("/api").Subrouter()
 
-	routerApi.HandleFunc("/a", homeHandler)
 
-	/*
-		Authentication by JWT
-	*/
+	routerApi.HandleFunc("/home", homeHandler)
+
+	// /api/get-token  (post with creds) and return token
 	routerApi.HandleFunc("/get-token", endpoints.Authenticate).Methods("POST")
 
-	/*
-			User Ressource
-		------------------------
-			User registration
-			User deletion
-			User update
-	*/
-
-	/*
-		resources's routes
-	*/
+	routerApi.HandleFunc("/private", endpoints.Authenticate).Methods("GET")
 
 	// server using https
 	err := http.ListenAndServeTLS(addressHttps, certFileHttps, keyFileHttps,
@@ -57,6 +52,19 @@ func main() {
 	}
 }
 
+func authServerGetToken(writer http.ResponseWriter, request *http.Request) {
+	// 1) read user and password in request body
+	// 2) validate credentials
+	// 		- if bad -> bad request response
+	//		- if good -> continue
+	// 3)
+	// 		- create a refresh token (long lived)
+	//		- create an access token (short lived)
+	// 		- save refresh token in whitelist
+}
+
+func authServerRefreshToken(writer http.ResponseWriter, request *http.Request) {
+}
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	user := models.User{
 		Name:     "Corentin",

@@ -25,9 +25,19 @@ func AuthMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		role := claims.(jwt.MapClaims)["role"].(string)
+		// get token's claims
+		isSingleUse := claims.(jwt.MapClaims)["isSingleUse"].(string)
+		userUuid := claims.(jwt.MapClaims)["userUuid"].(string)
+		tokenUuid := claims.(jwt.MapClaims)["tokenUuid"].(string)
 
-		r.Header.Set("role", role)
+		// check if can be used
+		// TODO: implement me
+
+
+		// transmit claims after verification of single use
+		r.Header.Set("isSingleUse", isSingleUse)
+		r.Header.Set("userUuid", userUuid)
+		r.Header.Set("tokenUuid", tokenUuid)
 
 		next.ServeHTTP(w, r)
 	})
